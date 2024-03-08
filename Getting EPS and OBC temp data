@@ -1,0 +1,30 @@
+#define PIN_TEMPOBC A1
+#define PIN_TEMPEPS A2
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n');
+    command.trim();
+    if (command.equals("TEMPOBC")) {
+      int reading = analogRead(PIN_TEMPOBC);
+      float temp = (reading * (5100.00 / 1024.00)) / 10.00;
+      Serial.print("OBC Temp is: ");
+      Serial.print(temp);
+      Serial.println("°C");
+      delay(1000);
+    }
+    if (command.equals("TEMPEPS")) {
+      int reading = analogRead(PIN_TEMPEPS);
+      float temp = (reading * (5100.00 / 1024.00)) / 10.00;
+      Serial.print("EPS Temp is: ");
+      Serial.print(temp);
+      Serial.println("°C");
+      delay(1000); }
+    
+  }
+
+}
+    
